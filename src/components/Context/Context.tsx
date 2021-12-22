@@ -14,6 +14,8 @@ interface ContextType {
     setPeers: React.Dispatch<SetStateAction<String[]>>;
     error: Error | null;
     setError: React.Dispatch<SetStateAction<Error | null>>;
+    shouldClearSearchTerm: boolean;
+    setShouldClearSearchTerm: React.Dispatch<SetStateAction<boolean>>;
 }
 
 export interface FinnhubClientType {
@@ -61,8 +63,9 @@ const defaultContext = {
     peers: [],
     setPeers: () => { },
     error: null,
-    setError: () => { }
-
+    setError: () => { },
+    shouldClearSearchTerm: false,
+    setShouldClearSearchTerm: ()=>{}
 }
 
 export const Context = createContext<ContextType>(defaultContext);

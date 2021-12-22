@@ -14,6 +14,7 @@ export const Provider: React.FC<React.ReactNode> = ({ children }) => {
     const [news, setNews] = useState<NewsType[]>([])
     const [peers, setPeers] = useState<String[]>([])
     const [error, setError] = useState<Error | null>(null)
+    const [shouldClearSearchTerm, setShouldClearSearchTerm] = useState(false);
 
     return <Context.Provider value={{
         searchTerm,
@@ -28,6 +29,8 @@ export const Provider: React.FC<React.ReactNode> = ({ children }) => {
         peers,
         setPeers,
         error,
-        setError
+        setError,
+        shouldClearSearchTerm,
+        setShouldClearSearchTerm
     }}>{children}</Context.Provider>
 }

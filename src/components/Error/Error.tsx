@@ -4,10 +4,10 @@ import { LightHouse } from "../LightHouse/LightHouse"
 
 export const ErrorMessage = () => {
 
-    const { setSearchTerm } = useContext(Context);
+    const { setShouldClearSearchTerm } = useContext(Context);
 
     const handleClick = () => {
-        setSearchTerm("");
+        setShouldClearSearchTerm(true);
         document.querySelector("input")?.focus();
     }
 
