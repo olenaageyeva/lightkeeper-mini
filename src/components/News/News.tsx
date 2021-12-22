@@ -1,9 +1,14 @@
+import { truncate } from "fs";
 import React, { useContext } from "react"
 import { Context } from "../Context/Context"
 
 export const News = () => {
     const { news } = useContext(Context);
     console.log("news", news);
+    const formatDate = (unixTimeStamp: string) => {
+        const date = new Date(Number(unixTimeStamp) * 1000);
+        return date.toLocaleDateString();
+    }
     return <aside className="flex flex-col flex-auto relative divide-y divide-gray-600 p-4 bg-slate-50">
         <h3 className="text-xl font-semibold">News</h3>
         <section>
@@ -14,7 +19,7 @@ export const News = () => {
                 <div className="flex-auto px-4">
                     <span className="flex flex-wrap">
                         <span className="flex-auto text-lg font-semibold text-gray-900">{item.source}</span>
-                        <span className="text-lg font-semibold text-gray-500">{item.datetime}</span>
+                        <span className="text-lg font-semibold text-gray-500">{formatDate(item.datetime)}</span>
                     </span>
                     <p className="mt-4 text-sm leading-6 col-start-1 sm:col-span-2 lg:mt-6 lg:row-start-4 lg:col-span-1 dark:text-gray-400">{item.headline}</p>
                 </div>
