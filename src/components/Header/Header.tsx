@@ -70,7 +70,7 @@ export const Header = () => {
 
     }, [finnhubClient, searchTerm, setStockData, setPeers, setInfo, setNews, info, news, peers, stockData, setError])
 
-    useEffect(() => {
+    useEffect(() => {        
         if (searchTerm) fetchData();
     }, [searchTerm, fetchData])
 

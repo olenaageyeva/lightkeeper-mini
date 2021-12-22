@@ -8,7 +8,7 @@ export const Provider: React.FC<React.ReactNode> = ({ children }) => {
     api_key.apiKey = "c716kraad3i9rhb96p3g";
     const finnhubClient = new finnhub.DefaultApi()
 
-    const [searchTerm, setSearchTerm] = useState<String>("");
+    const [searchTerm, setSearchTerm] = useState<string>("");
     const [stockData, setStockData] = useState<StockType>({ c: "", h: "", l: "" });
     const [info, setInfo] = useState<InfoType>({})
     const [news, setNews] = useState<NewsType[]>([])

@@ -1,10 +1,16 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import { Context } from "../Context/Context";
 
 
 export const Search = () => {
-    const { setSearchTerm } = useContext(Context);
-    const [term, setTerm] = useState("");
+    const { setSearchTerm, searchTerm } = useContext(Context);
+    const [term, setTerm] = useState<string>("");
+
+    useEffect(() => {
+        if (term !== searchTerm) {
+            setTerm(searchTerm)
+        }
+    }, [searchTerm, term])
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();

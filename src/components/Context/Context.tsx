@@ -1,8 +1,8 @@
 import { createContext, SetStateAction } from "react";
 
 interface ContextType {
-    searchTerm: String;
-    setSearchTerm: React.Dispatch<SetStateAction<String>>;
+    searchTerm: string;
+    setSearchTerm: React.Dispatch<SetStateAction<string>>;
     finnhubClient: FinnhubClientType;
     stockData: StockType;
     setStockData: React.Dispatch<SetStateAction<StockType>>;
