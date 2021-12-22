@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Context, InfoType, StockType } from "./Context";
+import { Context, InfoType, NewsType, StockType } from "./Context";
 
 const finnhub = require('finnhub');
 
@@ -11,6 +11,9 @@ export const Provider: React.FC<React.ReactNode> = ({ children }) => {
     const [searchTerm, setSearchTerm] = useState<String>("");
     const [stockData, setStockData] = useState<StockType>({ c: "", h: "", l: "" });
     const [info, setInfo] = useState<InfoType>({})
+    const [news, setNews] = useState<NewsType[]>([])
+    const [peers, setPeers] = useState<String[]>([])
+    const [error, setError] = useState<Error | null>(null)
 
     return <Context.Provider value={{
         searchTerm,
@@ -19,6 +22,12 @@ export const Provider: React.FC<React.ReactNode> = ({ children }) => {
         stockData,
         setStockData,
         info,
-        setInfo
+        setInfo,
+        news,
+        setNews,
+        peers,
+        setPeers,
+        error,
+        setError
     }}>{children}</Context.Provider>
 }

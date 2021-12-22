@@ -648,6 +648,7 @@ module.exports = {
       fit: "fit-content",
       prose: "65ch",
       ...breakpoints(theme("screens")),
+      "1300px": "1300px",
     }),
     minHeight: {
       0: "0px",
@@ -663,6 +664,7 @@ module.exports = {
       min: "min-content",
       max: "max-content",
       fit: "fit-content",
+      "1100px": "1100px",
     },
     objectPosition: {
       bottom: "bottom",
