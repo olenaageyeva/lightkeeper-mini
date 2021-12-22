@@ -6,18 +6,20 @@ import { News } from "../News/News"
 import { Peers } from "../Peers/Peers"
 
 export const Results = () => {
-    const { error, info } = useContext(Context);
+    const { error, info, searchTerm } = useContext(Context);
 
     return < main className="flex p-4 " >
-        {error || !info.name ?
-            <ErrorMessage />
-            : <>
-                <div>
-                    <Info />
-                    <Peers />
-                </div>
-                <News />
-            </>
+        {searchTerm ?
+            error || !info.name ?
+                <ErrorMessage />
+                : <>
+                    <div>
+                        <Info />
+                        <Peers />
+                    </div>
+                    <News />
+                </>
+            : null
         }
     </main >
 }
