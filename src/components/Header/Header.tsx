@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useState, useEffect, useContext, useCallback } from "react"
 import { Context } from "../Context/Context"
 import { Logo } from "../Logo/Logo"
 import { Quote } from "../Quote/Quote"
@@ -9,7 +9,7 @@ export const Header = () => {
 
     const [error, setError] = useState("");
 
-    const fetchData = async () => {
+    const fetchData = useCallback(async () => {
         if (!finnhubClient) return;
         finnhubClient.quote(searchTerm, (error: Error, data: { c: any, h: any, l: any }, response: object) => {
             if (error) {
@@ -20,11 +20,11 @@ export const Header = () => {
             setStockData(data)
             console.log(data)
         });
-    }
+    }, [finnhubClient, searchTerm,setStockData])
 
     useEffect(() => {
         if (searchTerm) fetchData();
-    }, [searchTerm])
+    }, [searchTerm, fetchData])
 
     return <header className="min-w-1050 flex item-start space-x-4 p-4">
         <Logo />
