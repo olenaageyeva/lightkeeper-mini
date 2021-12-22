@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { SearchPage } from './pages/SearchPage/SearchPage';
 import { Provider } from './components/Context/Provider';
 

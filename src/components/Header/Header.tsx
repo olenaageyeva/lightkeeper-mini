@@ -6,7 +6,7 @@ import { Search } from "../Search/Search"
 
 export const Header = () => {
     const { searchTerm, finnhubClient, setStockData } = useContext(Context);
-    
+
     const [error, setError] = useState("");
 
     const fetchData = async () => {
@@ -19,7 +19,7 @@ export const Header = () => {
             }
             setStockData(data)
             console.log(data)
-        });       
+        });
     }
 
     useEffect(() => {
@@ -30,5 +30,6 @@ export const Header = () => {
         <Logo />
         <Search />
         <Quote />
+        {error && <p>Error</p>}
     </header>
 }
