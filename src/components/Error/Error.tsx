@@ -1,4 +1,3 @@
-import { setDefaultResultOrder } from "dns";
 import React, { useContext } from "react"
 import { Context } from "../Context/Context"
 import { LightHouse } from "../LightHouse/LightHouse"
