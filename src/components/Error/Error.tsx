@@ -1,12 +1,15 @@
+import { setDefaultResultOrder } from "dns";
 import React, { useContext } from "react"
 import { Context } from "../Context/Context"
 import { LightHouse } from "../LightHouse/LightHouse"
 
 export const ErrorMessage = () => {
 
-    const { setShouldClearSearchTerm } = useContext(Context);
+    const { setError, setShouldClearSearchTerm, setSearchTerm } = useContext(Context);
 
     const handleClick = () => {
+        setError(null);
+        setSearchTerm("");
         setShouldClearSearchTerm(true);
         document.querySelector("input")?.focus();
     }
