@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { SearchPage } from './pages/SearchPage/SearchPage';
+import { Provider } from './components/Context/Provider';
 
 import "./styles/output.css";
 
-import { SearchPage } from './pages/SearchPage/SearchPage';
-
 export const App = () =>
-  <SearchPage />
+  <Provider>
+    <SearchPage />
+  </Provider>
+
 
 export default App;
