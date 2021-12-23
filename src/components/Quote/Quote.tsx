@@ -2,13 +2,31 @@ import React, { useContext } from "react";
 import { Context } from "../Context/Context"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLongArrowAltDown, faLongArrowAltUp } from '@fortawesome/free-solid-svg-icons'
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 export const Quote = () => {
   const { stockData } = useContext(Context);
 
+  interface QuoteType {
+    title: string;
+    iconProps?: { icon: IconDefinition, className: string, rest?: any };
+    data: string;
+  }
+
+  const QuoteCard = (props: QuoteType) => {
+    const { title, data, iconProps } = props;
+    return <div className="flex w-48 h-10 px-4 bg-slate-50 hover:bg-slate-100 inline-block leading-loose srink-0 justify-between">
+      <span className="font-semibold text-gray-900"> {title}
+        {iconProps && <FontAwesomeIcon  {...iconProps} />}
+      </span>
+      <span>${Number(data).toLocaleString()}</span>
+    </div>
+  }
+
   return <section className="flex relative items-start space-x-4 py-4 srink-0">
-    <div className="w-48 h-10 px-4 bg-slate-50 inline-block leading-loose srink-0">Price: {stockData.c}</div>
-    <div className="w-48 h-10 px-4 bg-slate-50 leading-loose srink-0">High <FontAwesomeIcon icon={faLongArrowAltUp} className="text-green-600" /> {stockData.h}</div>
-    <div className="w-48 h-10 px-4 bg-slate-50 leading-loose srink-0">Low <FontAwesomeIcon icon={faLongArrowAltDown} className="text-red-600" /> {stockData.l}</div>
+    <QuoteCard {...{ title: "Price:", data: stockData.c }} />
+    <QuoteCard {...{ title: "High ", data: stockData.h, iconProps: { icon: faLongArrowAltUp, className: "text-green-600" } }} />
+    <QuoteCard {...{ title: "Low ", data: stockData.l, iconProps: { icon: faLongArrowAltDown, className: "text-red-600" } }} />
   </section>
+
 }

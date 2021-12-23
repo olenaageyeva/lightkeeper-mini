@@ -3,16 +3,16 @@ import { Context } from "../Context/Context";
 
 
 export const Search = () => {
-    const { setSearchTerm, shouldClearSearchTerm, setShouldClearSearchTerm } = useContext(Context);
+    const { searchTerm, setSearchTerm, shouldClearSearchTerm, setShouldClearSearchTerm } = useContext(Context);
     const [term, setTerm] = useState<string>("");
 
     useEffect(() => {
         if (shouldClearSearchTerm) {
             console.log("here!!!!")
-            setTerm("");
+            setTerm(searchTerm);            
             setShouldClearSearchTerm(false);
         }
-    }, [shouldClearSearchTerm, setShouldClearSearchTerm])
+    }, [shouldClearSearchTerm, setShouldClearSearchTerm, searchTerm])
 
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

@@ -35,8 +35,8 @@ export interface InfoType {
     logo?: any;
     name?: any;
     ticker?: any;
-    weburl?: any;
-    phone?: any;
+    weburl?: string;
+    phone?: string;
     marketCapitalization?: any;
     shareOutstanding?: any;
     finnhubIndustry?: any;
