@@ -925,6 +925,7 @@ module.exports = {
       min: "min-content",
       max: "max-content",
       fit: "fit-content",
+      "420px": "420px",
     }),
     willChange: {
       auto: "auto",

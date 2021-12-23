@@ -16,6 +16,8 @@ interface ContextType {
     setError: React.Dispatch<SetStateAction<Error | null>>;
     shouldClearSearchTerm: boolean;
     setShouldClearSearchTerm: React.Dispatch<SetStateAction<boolean>>;
+    isLoading: boolean;
+    setIsLoading: React.Dispatch<SetStateAction<boolean>>;
 }
 
 export interface FinnhubClientType {
@@ -65,7 +67,9 @@ const defaultContext = {
     error: null,
     setError: () => { },
     shouldClearSearchTerm: false,
-    setShouldClearSearchTerm: ()=>{}
+    setShouldClearSearchTerm: () => { },
+    isLoading: false,
+    setIsLoading: () => { }
 }
 
 export const Context = createContext<ContextType>(defaultContext);

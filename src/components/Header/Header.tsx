@@ -7,10 +7,14 @@ import { Search } from "../Search/Search"
 const cache = new Map();
 
 export const Header = () => {
-    const { searchTerm, finnhubClient, setStockData, setInfo, setNews, setPeers, news, info, stockData, peers, error, setError } = useContext(Context);
+    const { searchTerm, finnhubClient, setStockData, setInfo, setNews, setPeers, news, info, stockData, peers, setError, setIsLoading } = useContext(Context);
+
+
 
     const fetchData = useCallback(async () => {
-        if (!finnhubClient) return;
+        if (!finnhubClient || searchTerm === "") return;
+
+        setIsLoading(true);
 
         if (!cache.has(searchTerm)) {
             setError(null);
@@ -54,23 +58,29 @@ export const Header = () => {
 
                 cache.set(searchTerm, { info, peers, stockData, news, error: null })
             } catch (error) {
-                setError(Error(String(error)))
-                cache.set(searchTerm, { error })
+                cache.set(searchTerm, { error: true })
+                setError(Error(`Error ${error}`))
             }
         }
 
         const cached = cache.get(searchTerm)
+
+        setIsLoading(false)
 
         if (!cached.error) {
             if (news !== cached.news) setNews(cached.news)
             if (stockData !== cached.stockData) setStockData(cached.stockData)
             if (peers !== cached.peers) setPeers(cached.peers)
             if (info !== cached.info) setInfo(cached.info)
+        } else {
+            setError(Error("Error"))
         }
 
-    }, [finnhubClient, searchTerm, setStockData, setPeers, setInfo, setNews, info, news, peers, stockData, setError])
+       
 
-    useEffect(() => {        
+    }, [finnhubClient, searchTerm, setStockData, setPeers, setInfo, setNews, info, news, peers, stockData, setError, setIsLoading])
+
+    useEffect(() => {
         if (searchTerm) fetchData();
     }, [searchTerm, fetchData])
 
@@ -78,6 +88,5 @@ export const Header = () => {
         <Logo />
         <Search />
         <Quote />
-        {error && <p>Error</p>}
     </header>
 }

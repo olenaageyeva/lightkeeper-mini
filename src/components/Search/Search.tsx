@@ -8,8 +8,7 @@ export const Search = () => {
 
     useEffect(() => {
         if (shouldClearSearchTerm) {
-            console.log("here!!!!")
-            setTerm(searchTerm);            
+            setTerm(searchTerm);
             setShouldClearSearchTerm(false);
         }
     }, [shouldClearSearchTerm, setShouldClearSearchTerm, searchTerm])
@@ -17,7 +16,6 @@ export const Search = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log("submitted");
         setSearchTerm(term);
     }
     return <form onSubmit={handleSubmit} className="group relative flex-auto my-4" >
