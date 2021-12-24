@@ -3,6 +3,22 @@ module.exports = {
   presets: [],
   darkMode: "media", // or 'class'
   theme: {
+    extend: {
+      animation: {
+        fadein: "fadeIn 2s ease-in",
+        fadeout: "fadeOut 2s ease-out",
+      },
+      keyframes: (theme) => ({
+        fadeIn: {
+          "0%": { opacity:'0' },
+          "100%": { opacity: '1' },
+        },
+        fadeOut: {
+          "0%": { opacity: '1' },
+          "100%": { opacity: '0' },
+        },
+      }),
+    },
     screens: {
       sm: "640px",
       md: "768px",
@@ -110,6 +126,7 @@ module.exports = {
       ping: "ping 1s cubic-bezier(0, 0, 0.2, 1) infinite",
       pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       bounce: "bounce 1s infinite",
+      fadeIn: "fadeIn 5s",
     },
     aspectRatio: {
       auto: "auto",

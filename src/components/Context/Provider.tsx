@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Context, InfoType, NewsType, StockType } from "./Context";
+import { Context, InfoType } from "./Context";
 
 const finnhub = require('finnhub');
 
@@ -9,10 +9,7 @@ export const Provider: React.FC<React.ReactNode> = ({ children }) => {
     const finnhubClient = new finnhub.DefaultApi()
 
     const [searchTerm, setSearchTerm] = useState<string>("");
-    const [stockData, setStockData] = useState<StockType>({ c: "", h: "", l: "" });
-    const [info, setInfo] = useState<InfoType>({})
-    const [news, setNews] = useState<NewsType[]>([])
-    const [peers, setPeers] = useState<String[]>([])
+    const [info, setInfo] = useState<InfoType>({ quotes: {} })
     const [error, setError] = useState<Error | null>(null)
     const [shouldClearSearchTerm, setShouldClearSearchTerm] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -21,14 +18,8 @@ export const Provider: React.FC<React.ReactNode> = ({ children }) => {
         searchTerm,
         setSearchTerm,
         finnhubClient,
-        stockData,
-        setStockData,
         info,
         setInfo,
-        news,
-        setNews,
-        peers,
-        setPeers,
         error,
         setError,
         shouldClearSearchTerm,

@@ -1,18 +1,20 @@
 import React, { useContext } from "react"
-import { Context } from "../Context/Context"
+import { Context, NewsType } from "../Context/Context"
 import newsPlaceholder from "./download.jpg"
 
 export const News = () => {
-    const { news } = useContext(Context);
-    console.log("news", news);
+    const { info } = useContext(Context);
+
+    const news = info.news ?? [];
+   
     const formatDate = (unixTimeStamp: string) => {
         const date = new Date(Number(unixTimeStamp) * 1000);
         return date.toLocaleDateString();
     }
-    return <aside className="flex flex-col flex-auto relative divide-y divide-gray-600 p-4 bg-slate-50 rounded-md">
+    return <aside className="flex flex-col basis-1/2 relative divide-y divide-gray-600 p-4 bg-slate-50 rounded-md shadow animate-fadein">
         <h3 className="text-xl font-semibold">News</h3>
         <section>
-            {news.slice(0, 5).map((item) => <div className="flex m-4  bg-gray-100 rounded-md hover:bg-slate-200">
+            {news.slice(0, 5).map((item: NewsType) => <div key={item.headline} className="flex m-4  bg-gray-100 rounded-md hover:bg-slate-200 shadow animate-fadein">
                 <div className="flex-none w-48  align-middle overflow-hidden relative rounded-xl">
                     <img alt="news" className="absolute inset-0 w-full h-full object-cover rounded-md" src={item.image || newsPlaceholder}></img>
                 </div>

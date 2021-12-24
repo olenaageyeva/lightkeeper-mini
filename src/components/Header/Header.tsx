@@ -1,5 +1,7 @@
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useEffect, useContext, useCallback } from "react"
-import { Context, InfoType, NewsType, StockType } from "../Context/Context"
+import { Context, ProfileType, NewsType, QuoteType } from "../Context/Context"
 import { Logo } from "../Logo/Logo"
 import { Quote } from "../Quote/Quote"
 import { Search } from "../Search/Search"
@@ -7,86 +9,68 @@ import { Search } from "../Search/Search"
 const cache = new Map();
 
 export const Header = () => {
-    const { searchTerm, finnhubClient, setStockData, setInfo, setNews, setPeers, news, info, stockData, peers, setError, setIsLoading } = useContext(Context);
+    const { searchTerm, finnhubClient, setInfo, error, setError, setIsLoading } = useContext(Context);
 
 
 
     const fetchData = useCallback(async () => {
-        if (!finnhubClient || searchTerm === "") return;
+        if (!finnhubClient) return;
 
         setIsLoading(true);
 
-        if (!cache.has(searchTerm)) {
-            setError(null);
-            try {
-                const stockData = await new Promise((res, rej) => finnhubClient.quote && finnhubClient.quote(searchTerm, (error: Error, data: StockType) => {
-                    if (error) {
-                        setError(error);
-                        return rej(error);
-                    }
-                    res(data)
+        try {
+            const quotes:QuoteType = await new Promise((res, rej) => finnhubClient.quote && finnhubClient.quote(searchTerm, (error: Error, data: QuoteType) => {
+                if (error) return rej(error);
+                res(data)
+            }));
 
-                }));
+            const profile: ProfileType = await new Promise((res, rej) => finnhubClient.companyProfile2 && finnhubClient.companyProfile2({ symbol: searchTerm }, (error: Error, data: ProfileType) => {
+                if (error) return rej(error);
+                res(data)
+            }));
 
-                const info = await new Promise((res, rej) => finnhubClient.companyProfile2 && finnhubClient.companyProfile2({ symbol: searchTerm }, (error: Error, data: InfoType) => {
-                    if (error) {
-                        console.log("error", error)
-                        setError(error);
-                        return rej(error);
-                    }
-                    res(data);
-                }));
+            const news: NewsType[] = await new Promise((res, rej) => finnhubClient.companyNews && finnhubClient.companyNews(searchTerm, "2020-01-01", "2021-12-22", (error: Error, data: NewsType[]) => {
+                if (error) return rej(error);
+                res(data)
+            }));
 
-                const news = await new Promise((res, rej) => finnhubClient.companyNews && finnhubClient.companyNews(searchTerm, "2020-01-01", "2021-12-22", (error: Error, data: NewsType) => {
-                    if (error) {
-                        console.log("error", error)
-                        setError(error);
-                        return rej(error);
-                    }
-                    res(data)
+            const peers: String[] = await new Promise((res, rej) => finnhubClient.companyPeers && finnhubClient.companyPeers(searchTerm, (error: Error, data: String[]) => {
+                if (error) return rej(error);
+                res(data)
+            }));
 
-                }));
-
-                const peers = await new Promise((res, rej) => finnhubClient.companyPeers && finnhubClient.companyPeers(searchTerm, (error: Error, data: String[]) => {
-                    if (error) {
-                        console.log("error", error)
-                        setError(error);
-                        return rej(error);
-                    }
-                    res(data)
-                }));
-
-                cache.set(searchTerm, { info, peers, stockData, news, error: null })
-            } catch (error) {
-                cache.set(searchTerm, { error: true })
-                setError(Error(`Error ${error}`))
-            }
+            cache.set(searchTerm, { profile, peers, quotes, news, error: null })
+            setInfo({ profile, peers, quotes, news })
+        } catch (error) {
+            cache.set(searchTerm, { error: `Error ${error}` })
+            setError(Error(`Error ${error}`))
         }
-
-        const cached = cache.get(searchTerm)
 
         setIsLoading(false)
 
-        if (!cached.error) {
-            if (news !== cached.news) setNews(cached.news)
-            if (stockData !== cached.stockData) setStockData(cached.stockData)
-            if (peers !== cached.peers) setPeers(cached.peers)
-            if (info !== cached.info) setInfo(cached.info)
-        } else {
-            setError(Error("Error"))
-        }
-
-       
-
-    }, [finnhubClient, searchTerm, setStockData, setPeers, setInfo, setNews, info, news, peers, stockData, setError, setIsLoading])
+    }, [finnhubClient, searchTerm, setIsLoading, setError, setInfo])
 
     useEffect(() => {
-        if (searchTerm) fetchData();
-    }, [searchTerm, fetchData])
+        if (searchTerm && !error) {
+            if (!cache.has(searchTerm)) fetchData();
+            else {
+                const cached = cache.get(searchTerm)
+
+                if (!cached.error) setInfo(cached)
+                else setError(Error(`Error ${cached.error}`))
+            }
+        }
+    }, [searchTerm, fetchData, setError, error, setInfo])
 
     return <header className="min-w-1050 flex item-start space-x-4 p-4">
         <Logo />
         <Search />
         <Quote />
+        <button className="tour-guide-button text-2xl text-blue-600">
+            <FontAwesomeIcon
+                icon={faInfoCircle}
+            // onClick={() => setIsOpen(!isOpen)}
+            />
+        </button>
     </header>
 }
