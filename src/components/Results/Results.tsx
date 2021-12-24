@@ -7,9 +7,7 @@ import { News } from "../News/News"
 import { Peers } from "../Peers/Peers"
 
 export const Results = () => {
-    const { error, searchTerm, isLoading, info: {quotes} } = useContext(Context);
-
-    console.log(error,searchTerm, quotes, isLoading)
+    const { error, searchTerm, isLoading, info: { quotes } } = useContext(Context);
 
     return < main className="flex p-4 " >
         {searchTerm && (error || !quotes.c) && !isLoading && <ErrorMessage />}

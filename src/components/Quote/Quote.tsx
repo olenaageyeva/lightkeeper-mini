@@ -3,6 +3,7 @@ import { Context } from "../Context/Context"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLongArrowAltDown, faLongArrowAltUp } from '@fortawesome/free-solid-svg-icons'
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { MissingData } from "../MissingData/MissingData";
 
 export const Quote = () => {
   const { info: {quotes}, error, isLoading, searchTerm } = useContext(Context);
@@ -19,8 +20,9 @@ export const Quote = () => {
       <span className="font-semibold text-gray-900"> {title}
         {iconProps && <FontAwesomeIcon  {...iconProps} />}
       </span>
-      <span>{!error && !isLoading && searchTerm && Number(data).toLocaleString()}</span>
-      <span className="text-green-600 text-xl font-bold">{(error || !searchTerm) && "- - -"}</span>
+      {!error && !isLoading && searchTerm && <span className="">${Number(data).toLocaleString()}</span>}
+      {(isLoading && searchTerm) &&<MissingData animate="animate-pulse" />}
+      {(error && !isLoading) && <MissingData />}
     </div>
   }
 
