@@ -9,7 +9,7 @@ import { Peers } from "../Peers/Peers"
 export const Results = () => {
     const { error, searchTerm, isLoading, info: { quotes } } = useContext(Context);
 
-    return < main className="flex p-4 " >
+    return < main className="flex-col md:flex md:flex-row p-4 " >
         {searchTerm && (error || !quotes.c) && !isLoading && <ErrorMessage />}
         {searchTerm && !error && quotes.c && !isLoading && <>
             <div className="flex flex-col basis-1/2">
@@ -18,6 +18,6 @@ export const Results = () => {
             </div>
             <News />
         </>}
-        {isLoading && <Loader />}
+        {isLoading  && <Loader />} 
     </main >
 }

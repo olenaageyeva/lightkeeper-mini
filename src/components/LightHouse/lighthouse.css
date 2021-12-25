@@ -37,6 +37,8 @@
   }
 }
 
-#lighthouse {
-  margin: 0 -210px;
+@media (min-width: 768px) {
+  #lighthouse {
+    margin: 0 -210px;
+  }
 }

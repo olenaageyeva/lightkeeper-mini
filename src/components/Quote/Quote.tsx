@@ -26,7 +26,7 @@ export const Quote = () => {
     </div>
   }
 
-  return <section className="flex relative items-start space-x-4 py-4 srink-0">
+  return <section className="flex-col space-y-4 md:space-y-0 md:flex-row md:flex relative items-start md:space-x-4 py-4 srink-0">
     <QuoteCard {...{ title: "Price:", data: quotes.c }} />
     <QuoteCard {...{ title: "High ", data: quotes.h, iconProps: { icon: faLongArrowAltUp, className: "text-green-600" } }} />
     <QuoteCard {...{ title: "Low ", data: quotes.l, iconProps: { icon: faLongArrowAltDown, className: "text-red-600" } }} />

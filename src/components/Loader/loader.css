@@ -1,3 +1,9 @@
 .loader #lighthouse {
-  margin: 0;
+  margin: 0 -70px;
+}
+
+@media (min-width: 768px){
+  .loader #lighthouse {
+    margin: 0;
+  }  
 }

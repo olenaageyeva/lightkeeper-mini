@@ -16,8 +16,8 @@ export const Info = () => {
         return null;
     }
 
-    return <article className="flex flex-col relative mx-8 p-4 bg-slate-50 shadow animate-fadein">
-        <section className="flex space-x-4 justify-items-center justify-between p-4 animate-fadein">
+    return <article className="flex flex-col mx-4 sm:w-full md:mx-8 md:w-auto p-4 bg-slate-50 shadow animate-fadein">
+        <section className="flex-col md:flex-row md:flex space-x-4 justify-items-center justify-between p-4 animate-fadein">
             <img alt="logo" src={profile.logo || logoPlaceholder} className="w-24 h-auto srink-0 rounded-xl"></img>
             <h2 className="font-bold text-3xl flex-wrap animate-fadein">{profile.name}</h2>
             <p className=" text-3xl">{profile.ticker}</p>
