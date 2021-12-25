@@ -64,5 +64,6 @@ export const Header = () => {
         <Logo />
         <Search />
         <Quote />
+        {searchTerm}
     </header>
 }
