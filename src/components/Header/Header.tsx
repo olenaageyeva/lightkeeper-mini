@@ -63,7 +63,6 @@ export const Header = () => {
     return <header className="min-w-full md:flex md:min-w-1050 md:flex-row sm:flex-col item-start space-x-4 p-4">
         <Logo />
         <Search />
-        <Quote />
-        {searchTerm}
+        <Quote />        
     </header>
 }
