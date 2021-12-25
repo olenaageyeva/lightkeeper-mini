@@ -1,5 +1,3 @@
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useEffect, useContext, useCallback } from "react"
 import { Context, ProfileType, NewsType, QuoteType } from "../Context/Context"
 import { Logo } from "../Logo/Logo"
@@ -19,7 +17,7 @@ export const Header = () => {
         setIsLoading(true);
 
         try {
-            const quotes:QuoteType = await new Promise((res, rej) => finnhubClient.quote && finnhubClient.quote(searchTerm, (error: Error, data: QuoteType) => {
+            const quotes: QuoteType = await new Promise((res, rej) => finnhubClient.quote && finnhubClient.quote(searchTerm, (error: Error, data: QuoteType) => {
                 if (error) return rej(error);
                 res(data)
             }));
@@ -66,11 +64,5 @@ export const Header = () => {
         <Logo />
         <Search />
         <Quote />
-        {/* <button className="tour-guide-button text-2xl text-blue-600">
-            <FontAwesomeIcon
-                icon={faInfoCircle}
-            onClick={() => setIsOpen(!isOpen)}
-            />
-         </button> */}
     </header>
 }
