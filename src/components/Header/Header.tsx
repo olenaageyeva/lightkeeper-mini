@@ -3,13 +3,13 @@ import { Context, ProfileType, NewsType, QuoteType } from "../Context/Context"
 import { Logo } from "../Logo/Logo"
 import { Quote } from "../Quote/Quote"
 import { Search } from "../Search/Search"
+import { Slider } from "../Slider/Slider"
 
 const cache = new Map();
 
 export const Header = () => {
     const { searchTerm, finnhubClient, setInfo, error, setError, setIsLoading } = useContext(Context);
-
-
+    
 
     const fetchData = useCallback(async () => {
         if (!finnhubClient) return;
@@ -60,9 +60,10 @@ export const Header = () => {
         }
     }, [searchTerm, fetchData, setError, error, setInfo])
 
-    return <header className="min-w-full md:flex md:min-w-1050 md:flex-row sm:flex-col item-start space-x-4 p-4">
+    return <header className="max-w-full md:flex md:min-w-1050 md:flex-row sm:flex-col item-start space-x-4 p-4">
         <Logo />
         <Search />
         <Quote />        
+        <Slider />
     </header>
 }

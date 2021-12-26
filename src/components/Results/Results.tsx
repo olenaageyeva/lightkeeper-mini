@@ -12,7 +12,7 @@ export const Results = () => {
     const shouldShowErrorMessage = searchTerm && (error || !quotes.c) && !isLoading;
     const shouldShowRubrics = searchTerm && !(error || !quotes.c) && !isLoading
 
-    return < main className={"flex-col md:flex md:flex-row p-4"} >
+    return < main className="max-w-screen flex-col md:flex md:flex-row p-4" >
         {shouldShowErrorMessage && <ErrorMessage />}
         {shouldShowRubrics && <>
             <div className="flex flex-col basis-1/2">

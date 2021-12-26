@@ -16,8 +16,8 @@ export const Quote = () => {
 
   const QuoteCard = (props: QuoteType) => {
     const { title, data, iconProps } = props;
-    return <div className="flex w-48 h-10 px-4 bg-slate-50 hover:bg-slate-100 inline-block leading-loose srink-0 justify-between shadow">
-      <span className="font-semibold text-gray-900"> {title}
+    return <div className="flex w-48 h-10 px-4 rounded-md bg-slate-50 dark:bg-gray-500 dark:text-gray-100 hover:bg-slate-100 inline-block leading-loose srink-0 justify-between shadow">
+      <span className="font-semibold text-gray-900 dark:text-gray-100"> {title}
         {iconProps && <FontAwesomeIcon  {...iconProps} />}
       </span>
       {!error && !isLoading && searchTerm && <span className="">${Number(data).toLocaleString()}</span>}

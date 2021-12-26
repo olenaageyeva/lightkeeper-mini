@@ -1,5 +1,12 @@
-import React from "react"
+import React, { useContext } from "react"
+import { Context } from "../Context/Context"
 
-export const Logo = () => <a href="/" className="flex-auto srink-0">
-    <img className="mx-4" src="https://lightkeeper.com/wp-content/uploads/2018/10/lightkeeper-mock-logo.png" alt="lightkeeper" />
+import logoInverted from "./logo_inverted.png"
+import logo from "./logo.png"
+
+export const Logo = () => {
+    const {isDark} = useContext(Context)
+return<a href="/" className="flex w-fit h-fit srink-0 rounded-md">
+    <img className="mx-4" src={isDark ? logoInverted : logo} alt="lightkeeper" />
     </a>
+}

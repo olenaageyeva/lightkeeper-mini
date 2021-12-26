@@ -1,7 +1,7 @@
 module.exports = {
   content: ["./src/**/*.{html,tsx}"],
   presets: [],
-  darkMode: "media", // or 'class'
+  darkMode: "class", // or 'class'
   theme: {
     extend: {
       animation: {
@@ -10,12 +10,12 @@ module.exports = {
       },
       keyframes: (theme) => ({
         fadeIn: {
-          "0%": { opacity:'0' },
-          "100%": { opacity: '1' },
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
         },
         fadeOut: {
-          "0%": { opacity: '1' },
-          "100%": { opacity: '0' },
+          "0%": { opacity: "1" },
+          "100%": { opacity: "0" },
         },
       }),
     },

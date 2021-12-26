@@ -12,6 +12,8 @@ interface ContextType {
     setShouldClearSearchTerm: React.Dispatch<SetStateAction<boolean>>;
     isLoading: boolean;
     setIsLoading: React.Dispatch<SetStateAction<boolean>>;
+    isDark: boolean;
+    setIsDark: React.Dispatch<SetStateAction<boolean>>;
 }
 
 export interface FinnhubClientType {
@@ -64,7 +66,9 @@ const defaultContext = {
     shouldClearSearchTerm: false,
     setShouldClearSearchTerm: () => { },
     isLoading: false,
-    setIsLoading: () => { }
+    setIsLoading: () => { },
+    isDark: true,
+    setIsDark: ()=>{}
 }
 
 export const Context = createContext<ContextType>(defaultContext);
