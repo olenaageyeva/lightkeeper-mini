@@ -14,6 +14,7 @@ export const Results = () => {
 
     return < main className="max-w-screen flex-col md:flex md:flex-row p-4" >
         {shouldShowErrorMessage && <ErrorMessage />}
+
         {shouldShowRubrics && <>
             <div className="flex flex-col basis-1/2">
                 <Info />
@@ -22,6 +23,6 @@ export const Results = () => {
             <News />
         </>
         }
-        {isLoading && <Loader />}
+        {isLoading && <Loader />}       
     </main >
 }
