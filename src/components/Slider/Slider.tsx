@@ -8,22 +8,8 @@ import { Context } from "../Context/Context";
 export const Slider = () => {
     const { isDark, setIsDark } = useContext(Context);
 
-    const handleChange = () => {
-        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-        if (localStorage.theme === 'dark') 
-            document.documentElement.classList.remove('dark')
-         else 
-            document.documentElement.classList.add('dark')
-        
-
-        // Whenever the user explicitly chooses light mode
-        if (isDark) localStorage.theme = 'light'
-
-        // Whenever the user explicitly chooses dark mode
-        if (!isDark) localStorage.theme = 'dark'
-
-        // Whenever the user explicitly chooses to respect the OS preference
-        //localStorage.removeItem('theme')
+    const handleChange = () => {               
+        localStorage.theme = isDark ? "light" : "dark";       
         setIsDark(!isDark);
     }
 
