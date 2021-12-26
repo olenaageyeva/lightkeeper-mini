@@ -11,10 +11,10 @@ export const News = () => {
         const date = new Date(Number(unixTimeStamp) * 1000);
         return date.toLocaleDateString();
     }
-    return <aside className="flex flex-col m-4 md:m-0 basis-1/2 relative divide-y divide-gray-600 p-4 bg-slate-50 rounded-md shadow animate-fadein dark:bg-gray-500 dark:text-slate-100">
+    return <aside className="flex flex-col m-4 md:m-0 basis-1/2 relative divide-y divide-gray-600 p-4 bg-slate-50 rounded-md shadow animate-fadein dark:bg-gray-900 dark:text-slate-100">
         <h3 className="text-xl font-semibold">News</h3>
         <section>
-            {news.slice(0, 5).map((item: NewsType) => <div key={item.headline} className="flex-col md:flex  md:flex-row my-2 md:m-4 bg-gray-100 rounded-md hover:bg-slate-200 shadow animate-fadein dark:bg-gray-400">
+            {news.slice(0, 5).map((item: NewsType) => <div key={item.headline} className="flex-col md:flex  md:flex-row my-2 md:m-4 bg-gray-100 rounded-md hover:bg-slate-200 shadow animate-fadein dark:bg-gray-800">
                 <div className="flex w-fit md:flex-none md:w-48  relative align-middle overflow-hidden relative rounded-xl">
                     <img alt="news" className="inset-0 w-auto  object-cover rounded-md" src={item.image || newsPlaceholder}></img>
                 </div>
