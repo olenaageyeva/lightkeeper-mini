@@ -32,7 +32,7 @@ export const Info = () => {
         <h3 className="text-xl font-semibold">Company Profile </h3>
         <section className="py-4">
             <div className="flex-col md:flex-row md:flex justify-items-center justify-between  animate-fadein">
-                <img alt="logo" src={profile.logo || logoPlaceholder} className="basis-fit max-w-1/3 rounded-xl"></img>
+                <img alt="logo" src={profile.logo || logoPlaceholder} className="basis-1/3 rounded-xl"></img>
                 <h2 className="font-bold w-1/3 text-xl xl:text-3xl flex-wrap animate-fadein">{profile.name}</h2>
                 <p className="text-3xl">{profile.ticker}</p>
             </div>
