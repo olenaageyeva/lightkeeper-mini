@@ -13,7 +13,7 @@ export const ErrorMessage = () => {
         document.querySelector("input")?.focus();
     }
 
-    return <div className="flex flex-col md:w-1/2 mx-auto p-8 bg-red-50 rounded-md text-white-100 justify-center shadow">
+    return <div className="flex flex-col lg:w-1/2 mx-auto p-8 bg-red-50 rounded-md text-white-100 justify-center shadow">
         <p className="text-red-300 text-center text-xl md:text-9xl uppercase my-4 ">Sorry</p>
         <p className="text-center text-lg font-semibold">We could not find what you are looking for...</p>
         <div id="error-message" className="text-center mx-auto">
