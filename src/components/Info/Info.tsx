@@ -28,17 +28,17 @@ export const Info = () => {
         </p>
 
 
-    return <article className="flex flex-col mx-4 sm:w-full md:mx-8 md:w-auto p-4 bg-slate-50 shadow animate-fadein rounded-md dark:bg-gray-900 dark:text-slate-100">
-        <section className="flex-col md:flex-row md:flex space-x-4 justify-items-center justify-between p-4 animate-fadein">
-            <img alt="logo" src={profile.logo || logoPlaceholder} className="srink-0 rounded-xl"></img>
-            <h2 className="font-bold text-3xl flex-wrap animate-fadein">{profile.name}</h2>
-            <p className=" text-3xl">{profile.ticker}</p>
+    return <article className="flex flex-col mx-4 p-4 bg-slate-50 shadow animate-fadein rounded-md dark:bg-gray-900 dark:text-slate-100">
+        <section className="flex-col md:flex-row md:flex justify-items-center justify-between  animate-fadein">
+            <img alt="logo" src={profile.logo || logoPlaceholder} className="w-1/3 srink-0 rounded-xl"></img>
+            <h2 className="font-bold w-1/3 text-xl xl:text-3xl flex-wrap animate-fadein">{profile.name}</h2>
+            <p className="text-3xl">{profile.ticker}</p>
         </section>
-        <div className="flex flex-col p-4">
+        <div className="flex flex-col py-2">
             <p>{profile.weburl}</p>
             <p>{(profile.phone && formatPhoneNumber(profile.phone)) || profile.phone}</p>
         </div>
-        <div className="flex flex-col p-4">
+        <div className="flex flex-col py-3">
             <InfoRow title="Market Capitalization" data= {profile.marketCapitalization} />
             <InfoRow title="Share Outstanding" data= {profile.shareOutstanding} />
             <InfoRow title="Industry" data= {profile.finnhubIndustry} />

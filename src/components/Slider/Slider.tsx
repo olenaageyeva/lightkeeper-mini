@@ -13,7 +13,7 @@ export const Slider = () => {
         setIsDark(!isDark);
     }
 
-    return <div className="flex theme-switch-wrapper m-4">
+    return <div className="flex m-4">
         <span id="toggle-icon">
             <FontAwesomeIcon icon={isDark ? faMoon : faSun} className="text-gray-600 dark:text-gray-100 text-3xl mx-2"/>
         </span>

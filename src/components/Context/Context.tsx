@@ -3,10 +3,10 @@ import { createContext, SetStateAction } from "react";
 interface ContextType {
     searchTerm: string;
     setSearchTerm: React.Dispatch<SetStateAction<string>>;
-    finnhubClient: FinnhubClientType;    
+    finnhubClient: FinnhubClientType;
     info: InfoType;
-    setInfo: React.Dispatch<SetStateAction<InfoType>>; 
-    error: Error | null;   
+    setInfo: React.Dispatch<SetStateAction<InfoType>>;
+    error: Error | null;
     setError: React.Dispatch<SetStateAction<Error | null>>;
     shouldClearSearchTerm: boolean;
     setShouldClearSearchTerm: React.Dispatch<SetStateAction<boolean>>;
@@ -17,17 +17,19 @@ interface ContextType {
 }
 
 export interface FinnhubClientType {
-    quote?: (param: String, cb: (err: Error, data: QuoteType) => any) => void;
-    companyProfile2?: (options: { symbol: String }, cb: (err: Error, data: ProfileType) => any) => void;
-    companyNews?: (param: String, start: String, end: String, cb: (err: Error, data: NewsType[]) => any) => void;
-    companyPeers?: (params: String, cb: (err: Error, data: String[])=>any)=> void;
+    quote?: (param: string, cb: (err: Error, data: QuoteType) => any) => void;
+    companyProfile2?: (options: { symbol: string }, cb: (err: Error, data: ProfileType) => any) => void;
+    companyNews?: (param: string, start: string, end: string, cb: (err: Error, data: NewsType[]) => any) => void;
+    companyPeers?: (params: string, cb: (err: Error, data: string[]) => any) => void;
+    stockCandles?: (param: string, resolution: string, start: number, end: number, cb: (err: Error, data: CandleType) => any) => void;
 }
 
 export interface InfoType {
     profile?: ProfileType;
     quotes: QuoteType;
     news?: NewsType[];
-    peers?: String[];
+    peers?: string[];
+    candles?: CandleType;
 }
 
 export interface QuoteType {
@@ -54,13 +56,18 @@ export interface NewsType {
     datetime?: any;
 }
 
+export interface CandleType {
+    t: number[],
+    c: number[]
+}
+
 
 const defaultContext = {
     searchTerm: "",
     setSearchTerm: () => { },
-    finnhubClient: {},  
-    info: {quotes: {}},
-    setInfo: () => { },    
+    finnhubClient: {},
+    info: { quotes: {} },
+    setInfo: () => { },
     error: null,
     setError: () => { },
     shouldClearSearchTerm: false,
@@ -68,7 +75,7 @@ const defaultContext = {
     isLoading: false,
     setIsLoading: () => { },
     isDark: true,
-    setIsDark: ()=>{}
+    setIsDark: () => { }
 }
 
 export const Context = createContext<ContextType>(defaultContext);
