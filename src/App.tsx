@@ -6,8 +6,6 @@ import "./styles/output.css";
 
 export const App = () =>
   <Provider>
-    <SearchPage />
+    <SearchPage />    
   </Provider>
 
-
-export default App;

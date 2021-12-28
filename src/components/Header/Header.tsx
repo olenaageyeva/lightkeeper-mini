@@ -69,7 +69,7 @@ export const Header = () => {
         }
     }, [searchTerm, fetchData, setError, error, setInfo])
 
-    return <header className="flex-auto flex-col base-full lg:flex lg:flex-row lg:flex-row lg:justify-beetween xl:min-w-1050 item-start space-x-4 p-4">
+    return <header className="flex-col lg:flex lg:flex lg:flex-row lg:justify-beetween lg:min-w-1050 item-start space-x-4 p-4">
         <Logo />
         <Search />
         <Quote />

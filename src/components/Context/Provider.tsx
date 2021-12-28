@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Context, InfoType } from "./Context";
 
 const finnhub = require('finnhub');
@@ -19,7 +19,7 @@ export const Provider: React.FC<React.ReactNode> = ({ children }) => {
         isDark ? document.documentElement.classList.add('dark') : document.documentElement.classList.remove('dark')
     }, [isDark])
 
-    return <Context.Provider value={{
+        return <Context.Provider value={{
         searchTerm,
         setSearchTerm,
         finnhubClient,

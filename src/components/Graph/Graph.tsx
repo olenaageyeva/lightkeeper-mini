@@ -13,8 +13,6 @@ export const Graph = () => {
 
     const candles = info.candles ? info.candles.c.map((candle, index) => [times[index]*1000, candle]) : [];
 
-    console.log("times", times)
-
     const options = {
         chart: {
             backgroundColor: isDark ? "rgb(17 24 39 / var(--tw-bg-opacity))" : "",
