@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import { Context, NewsType } from "../Context/Context"
-import newsPlaceholder from "./download.jpg"
+import newsPlaceholder from "./download.png"
 
 export const News = () => {
     const { info } = useContext(Context);
