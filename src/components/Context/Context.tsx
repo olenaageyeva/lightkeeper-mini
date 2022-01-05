@@ -22,6 +22,7 @@ export interface FinnhubClientType {
     companyNews?: (param: string, start: string, end: string, cb: (err: Error, data: NewsType[]) => any) => void;
     companyPeers?: (params: string, cb: (err: Error, data: string[]) => any) => void;
     stockCandles?: (param: string, resolution: string, start: number, end: number, cb: (err: Error, data: CandleType) => any) => void;
+    recommendationTrends?: (param: string, cb: (err: Error, data: RecommendationType[]) => any) => void;
 }
 
 export interface InfoType {
@@ -30,6 +31,7 @@ export interface InfoType {
     news?: NewsType[];
     peers?: string[];
     candles?: CandleType;
+    recommendation?: string;
 }
 
 export interface QuoteType {
@@ -57,10 +59,15 @@ export interface NewsType {
 }
 
 export interface CandleType {
-    t: number[],
-    c: number[]
+    t: number[];
+    c: number[];
 }
 
+export interface RecommendationType {
+    buy: number;
+    hold: number;
+    sell: number;
+}
 
 const defaultContext = {
     searchTerm: "",

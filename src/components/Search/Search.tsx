@@ -1,8 +1,10 @@
 import React, { useState, useContext, useEffect } from "react"
+import { useSearchParams } from "react-router-dom";
 import { Context } from "../Context/Context";
 
 
 export const Search = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
     const { searchTerm, setSearchTerm, shouldClearSearchTerm, setShouldClearSearchTerm } = useContext(Context);
     const [term, setTerm] = useState<string>("");
 
@@ -13,9 +15,18 @@ export const Search = () => {
         }
     }, [shouldClearSearchTerm, setShouldClearSearchTerm, searchTerm])
 
+    useEffect(() => {
+        const termFromUrl = searchParams.get("ticker") ?? null
+        if (termFromUrl && termFromUrl !== searchTerm) {
+            setSearchTerm(termFromUrl);
+            setTerm(termFromUrl)
+        }
+    }, [searchParams, setTerm])
+
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setSearchParams({ ticker: term })
         setSearchTerm(term);
     }
     return <form onSubmit={handleSubmit} className="flex relative my-4 xl:basis-40 shrink-0" >

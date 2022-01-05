@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useCallback } from "react"
-import { Context, ProfileType, NewsType, QuoteType, CandleType } from "../Context/Context"
+import { Context, ProfileType, NewsType, QuoteType, CandleType, RecommendationType } from "../Context/Context"
 import { Logo } from "../Logo/Logo"
 import { Quote } from "../Quote/Quote"
 import { Search } from "../Search/Search"
@@ -8,7 +8,9 @@ import { Slider } from "../Slider/Slider"
 const cache = new Map();
 
 export const Header = () => {
-    const { searchTerm, finnhubClient, setInfo, error, setError, setIsLoading } = useContext(Context);
+
+    const { searchTerm, finnhubClient, setInfo, error, setError, setIsLoading, info } = useContext(Context);
+
 
 
     const fetchData = useCallback(async () => {
@@ -17,7 +19,7 @@ export const Header = () => {
         setIsLoading(true);
 
         const todayDate = new Date();
-        const dateOffset = 183 * 24 * 60 * 60; //6 month from now
+        const dateOffset = 183 * 24 * 60 * 60; //6 month from now      
 
 
         try {
@@ -46,7 +48,22 @@ export const Header = () => {
                 res(data)
             }))
 
-            cache.set(searchTerm, { profile, peers, quotes, news, candles, error: null })
+            const recommendation: string = await new Promise((res, rej) => finnhubClient.recommendationTrends && finnhubClient.recommendationTrends(searchTerm, (error: Error, data: RecommendationType[]) => {
+                if (error) return rej(error);
+
+                let recommendation = "NONE";
+                if (data.length) {
+                    const { sell, buy, hold } = data[0];
+                    recommendation = sell > buy && sell > hold ? "SELL" : recommendation;
+                    recommendation = buy > sell && buy > hold ? "BUY" : recommendation;
+                    recommendation = hold > buy && hold > sell ? "HOLD" : recommendation;
+                    console.log("data", data[0], recommendation)
+                }
+                res(recommendation)
+            }))
+
+
+            cache.set(searchTerm, { profile, peers, quotes, news, candles, recommendation, error: null })
             setInfo({ profile, peers, quotes, news })
         } catch (error) {
             cache.set(searchTerm, { error: `Error ${error}` })
@@ -69,7 +86,9 @@ export const Header = () => {
         }
     }, [searchTerm, fetchData, setError, error, setInfo])
 
-    return <header className="flex-col lg:flex lg:flex lg:flex-row lg:justify-beetween lg:min-w-1050 item-start space-x-4 p-4">
+
+
+    return <header className="flex-col lg:flex lg:flex-row lg:justify-beetween lg:min-w-max  item-start space-x-4 p-4">
         <Logo />
         <Search />
         <Quote />
