@@ -56,8 +56,7 @@ export const Header = () => {
                     const { sell, buy, hold } = data[0];
                     recommendation = sell > buy && sell > hold ? "SELL" : recommendation;
                     recommendation = buy > sell && buy > hold ? "BUY" : recommendation;
-                    recommendation = hold > buy && hold > sell ? "HOLD" : recommendation;
-                    console.log("data", data[0], recommendation)
+                    recommendation = hold > buy && hold > sell ? "HOLD" : recommendation;                    
                 }
                 res(recommendation)
             }))
