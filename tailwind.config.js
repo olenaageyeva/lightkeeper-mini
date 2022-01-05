@@ -674,6 +674,7 @@ module.exports = {
       min: "min-content",
       max: "max-content",
       fit: "fit-content",
+      "130vh": "130vh"
     },
     minWidth: {
       0: "0px",
@@ -682,6 +683,7 @@ module.exports = {
       max: "max-content",
       fit: "fit-content",
       "1100px": "1100px",
+      "1200px": "1200px",
     },
     objectPosition: {
       bottom: "bottom",

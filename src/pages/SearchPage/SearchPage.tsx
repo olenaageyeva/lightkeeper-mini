@@ -6,8 +6,8 @@ import { Context } from "../../components/Context/Context"
 export const SearchPage = () => {
     const {isDark}=useContext(Context);
 
-    return <div key={isDark ? "dark" : ""} className="bg-white w-screen h-fit min-w-screen dark:bg-black min-h-screen block">
-        <div className="flex-col divide-y divide-gray-100 2xl:max-w-1300px 2xl:min-w-1100px mx-auto">
+    return <div key={isDark ? "dark" : ""} className="bg-white w-screen h-fit min-w-screen lg:min-w-min dark:bg-black min-h-130vh block">
+        <div className="flex-col divide-y divide-gray-100 lg:max-w-1300px  mx-auto">
             <Header />
             <Results />
         </div>
