@@ -13,7 +13,7 @@ export const Provider: React.FC<React.ReactNode> = ({ children }) => {
     const [error, setError] = useState<Error | null>(null)
     const [shouldClearSearchTerm, setShouldClearSearchTerm] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [isDark, setIsDark] = useState(localStorage.theme === "dark");
+    const [isDark, setIsDark] = useState(localStorage.theme !== "light");
 
     useEffect(() => {
         isDark ? document.documentElement.classList.add('dark') : document.documentElement.classList.remove('dark')

@@ -59,8 +59,8 @@ export interface NewsType {
 }
 
 export interface CandleType {
-    t: number[];
-    c: number[];
+    t?: number[];
+    c?: number[];
 }
 
 export interface RecommendationType {
