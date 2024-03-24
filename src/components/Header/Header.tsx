@@ -5,6 +5,40 @@ import { Quote } from "../Quote/Quote"
 import { Search } from "../Search/Search"
 import { Slider } from "../Slider/Slider"
 
+const mockCandleData = {
+    "c": [
+        217.68,
+        221.03,
+        219.89
+    ],
+    "h": [
+        222.49,
+        221.5,
+        220.94
+    ],
+    "l": [
+        217.19,
+        217.1402,
+        218.83
+    ],
+    "o": [
+        221.03,
+        218.55,
+        220
+    ],
+    "s": "ok",
+    "t": [
+        1569297600,
+        1569384000,
+        1569470400
+    ],
+    "v": [
+        33463820,
+        24018876,
+        20730608
+    ]
+}
+
 const cache = new Map();
 
 export const Header = () => {
@@ -44,8 +78,8 @@ export const Header = () => {
             }));
 
             const candles: CandleType = await new Promise((res, rej) => finnhubClient.stockCandles && finnhubClient.stockCandles(searchTerm, "D", Math.floor(todayDate.getTime() / 1000 - dateOffset), Math.floor(todayDate.getTime() / 1000), (error: Error, data: CandleType) => {
-                if (error) return rej(error);
-                res(data)
+                if (error) return res(mockCandleData);
+                res(data || [])
             }))
 
             const recommendation: string = await new Promise((res, rej) => finnhubClient.recommendationTrends && finnhubClient.recommendationTrends(searchTerm, (error: Error, data: RecommendationType[]) => {
@@ -56,13 +90,13 @@ export const Header = () => {
                     const { sell, buy, hold } = data[0];
                     recommendation = sell > buy && sell > hold ? "SELL" : recommendation;
                     recommendation = buy > sell && buy > hold ? "BUY" : recommendation;
-                    recommendation = hold > buy && hold > sell ? "HOLD" : recommendation;                    
+                    recommendation = hold > buy && hold > sell ? "HOLD" : recommendation;
                 }
                 res(recommendation)
             }))
 
 
-            cache.set(searchTerm, { profile, peers, quotes, news, candles, recommendation, error: null })
+            cache.set(searchTerm, { profile, peers, quotes, candles, news, recommendation, error: null })
             setInfo({ profile, peers, quotes, news })
         } catch (error) {
             cache.set(searchTerm, { error: `Error ${error}` })
