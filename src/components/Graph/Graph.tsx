@@ -9,9 +9,9 @@ export const Graph = () => {
 
     const { info, isDark } = useContext(Context);
 
-    const times = info.candles ? info.candles.t : [];
+    const times = info.candles && info.candles?.t  ? info.candles.t : [];
 
-    const candles = info.candles ? info.candles.c.map((candle, index) => [times[index]*1000, candle]) : [];
+    const candles = info.candles && info.candles?.c ? info.candles.c.map((candle, index) => [times[index]*1000, candle]) : [];
 
     const options = {
         chart: {
